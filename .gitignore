@@ -1,0 +1,5 @@
+node_modules/
+*.env
+dev-data/areaCode.json
+dev-data/data.json
+dev-data/import-dev-data.js
