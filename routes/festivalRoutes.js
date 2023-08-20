@@ -3,8 +3,7 @@ const festivalController = require("./../controllers/festivalConrtoller");
 
 const router = express.Router();
 
-router.route("/").get(festivalController.getAll);
-
-router.route("/:id").get(festivalController.getOne);
+router.route("/").get(festivalController.getAllFestival);
+router.route("/:id").get(festivalController.getFestival);
 
 module.exports = router;
