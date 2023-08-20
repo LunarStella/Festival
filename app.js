@@ -1,7 +1,8 @@
 const express = require("express");
 const globalErrorHandler = require("./controllers/errorController");
-const userRouter = require("./routes/userRoutes");
 const festivalRouter = require("./routes/festivalRoutes");
+const userRouter = require("./routes/userRoutes");
+const reviewRouter = require("./routes/reveiwRoutes");
 
 // http 앱 생성
 const app = express();
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 // ROUTES
 app.use("/api/v1/festivals", festivalRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
