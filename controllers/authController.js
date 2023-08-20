@@ -50,6 +50,7 @@ const createSendToken = (user, statusCode, res) => {
 // 회원가입
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
+    nickname: req.body.nickname,
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,

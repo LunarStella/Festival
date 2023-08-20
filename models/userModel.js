@@ -4,6 +4,13 @@ const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
 
 const userSchema = new mongoose.Schema({
+  nickname: {
+    type: String,
+    required: [true, "닉네임을 입력해주세요"],
+    unique: true,
+    minlength: [1, "최소 1자 이상 입력해야 합니다."],
+    maxlength: [15, "최대 15자까지 입력 가능합니다."],
+  },
   email: {
     type: String,
     required: [true, "이메일을 입력해주세요"],
@@ -14,7 +21,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "비밀번호를 입력해주세요"],
-    minlength: 8,
+    minlength: [8, "최소 8자 이상 입력해야 합니다."],
     select: false,
   },
   passwordConfirm: {
@@ -63,6 +70,7 @@ userSchema.methods.correctPassword = async function(
   return await bcrypt.compare(candidatePassword, userPassword);
 };
 
+// <FIX REQUIRED> 로그아웃 전에 사용한 토큰이 유효하지 않게 하는 방법 생각
 // 로그아웃 후 생성 된 토큰인지 확인
 userSchema.methods.logoutAfterCompare = function(JWTTimeStamp) {
   //로그아웃 전에 받은 토큰인지 체크, 토큰 생성 시간 < 로그아웃 시간 => 옳지 않은 토큰
