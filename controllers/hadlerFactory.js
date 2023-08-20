@@ -8,9 +8,8 @@ const APIFeatures = require("../utils/apiFeatures");
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // festival 하나를 갖고 찾고 싶을 떄 filter 사용
-    //<FIX REQUIRED> 뭔가 섞임
     let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
+    if (req.params.festivalId) filter = { festival: req.params.festivalId };
 
     // 특정 조건 찾음
     const features = new APIFeatures(Model.find(filter), req.query)
