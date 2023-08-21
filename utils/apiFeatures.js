@@ -14,6 +14,7 @@ class APIFeatures {
 
     //  대소관계를 통해 filter 가능
     let queryStr = JSON.stringify(queryObj);
+    // eventenddate보다 큰 것을 구해 현재 진행중인 festival 알 수 있음
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
@@ -27,8 +28,8 @@ class APIFeatures {
       const sortBy = this.queryString.sort.split(",").join(" ");
       this.query = this.query.sort(sortBy);
     } else {
-      //<FIX REQUIRED> 나중에 지금 시간에서 가까운 기준으로 sort
-      this.query = this.query.sort("-eventstartdate");
+      //먼저 앞에서 지금 시간보다 앞선 것을 fileter
+      this.query = this.query.sort({ eventstartdate: 1 });
     }
 
     return this;
@@ -40,6 +41,7 @@ class APIFeatures {
       const fields = this.queryString.fields.split(",").join(" ");
       this.query = this.query.select(fields);
     } else {
+      // __v field 제거
       this.query = this.query.select("-__v");
     }
 
