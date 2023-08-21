@@ -12,7 +12,7 @@ router
   .get(reviewController.getAllReviews)
   .post(
     authController.protect,
-    reviewController.setTourUserIds,
+    reviewController.setFestivalUserIds,
     reviewController.createReview
   );
 

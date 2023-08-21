@@ -26,6 +26,16 @@ const festivalSchema = new mongoose.Schema(
     sigungucode: String,
     tel: String,
     title: String,
+    ratingsAverage: {
+      type: Number,
+      default: 4.5,
+      min: [1, "평점은 1점 이상이어야 합니다."],
+      max: [5, "평점은 5점 이하이어햐 합니다."],
+    },
+    ratingsQuantity: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     toJSON: { virtuals: true },
